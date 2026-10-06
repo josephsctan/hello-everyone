@@ -1,140 +1,980 @@
 [
-  { "id": "mandarin", "name": "Mandarin", "own": "普通话", "where": "China, Taiwan, Singapore", "lang": "zh-CN", "tts": "zh-CN",
+  {
+    "id": "arabic",
+    "name": "Arabic",
+    "own": "العربية",
+    "where": "Iraq, Saudi Arabia, Egypt and the Arab world",
+    "lang": "ar",
+    "tts": "ar",
+    "rtl": true,
+    "tip": "This is Modern Standard Arabic, understood everywhere. Spoken dialects such as Iraqi differ. kh is the throaty sound in Scottish loch, and the ' is a deep throat stop.",
+    "items": [
+      {
+        "t": "السلام عليكم جميعًا",
+        "r": "as-salamu alaykum jamee'an",
+        "s": "ahs-sah-LAH-moo ah-LAY-koom jah-MEE-ahn",
+        "m": "Peace be upon you all",
+        "g": "Any time",
+        "p": {
+          "t": "السلام عليكم",
+          "r": "as-salamu alaykum",
+          "s": "ahs-sah-LAH-moo ah-LAY-koom",
+          "m": "Peace be upon you",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "صباح الخير للجميع",
+        "r": "sabah al-khayr lil-jamee'",
+        "s": "sah-BAH-hal KHAYR lil-jah-MEE",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "صباح الخير",
+          "r": "sabah al-khayr",
+          "s": "sah-BAH-hal KHAYR",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mandarin",
+    "name": "Mandarin",
+    "own": "普通话",
+    "where": "China, Taiwan, Singapore",
+    "lang": "zh-CN",
+    "tts": "zh-CN",
     "tip": "Tones: 大 falls sharply, 家 is high and level, 好 dips low and rises slightly.",
     "items": [
-      { "t": "大家好", "r": "dàjiā hǎo", "s": "dah-jyah how", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "各位好", "r": "gèwèi hǎo", "s": "guh-way how", "m": "Hello, all", "g": "Polite" }
-    ] },
-  { "id": "cantonese", "name": "Cantonese", "own": "廣東話", "where": "Hong Kong, Macau, Guangdong", "lang": "zh-HK", "tts": "yue",
+      {
+        "t": "大家好",
+        "r": "dàjiā hǎo",
+        "s": "dah-jyah how",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "你好",
+          "r": "nǐ hǎo",
+          "s": "nee how",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "各位好",
+        "r": "gèwèi hǎo",
+        "s": "guh-way how",
+        "m": "Hello, all",
+        "g": "Polite",
+        "p": {
+          "t": "您好",
+          "r": "nín hǎo",
+          "s": "neen how",
+          "m": "Hello (respectful)",
+          "g": "Polite"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cantonese",
+    "name": "Cantonese",
+    "own": "廣東話",
+    "where": "Hong Kong, Macau, Guangdong",
+    "lang": "zh-HK",
+    "tts": "yue",
     "tip": "Six tones. The number after each syllable in Jyutping (1 to 6) marks its tone. Say 早晨, not 早上好, for good morning.",
     "items": [
-      { "t": "大家好", "r": "daai6 gaa1 hou2", "s": "dye gah ho", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "大家早晨", "r": "daai6 gaa1 zou2 san4", "s": "dye gah joe sun", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "korean", "name": "Korean", "own": "한국어", "where": "South Korea, North Korea", "lang": "ko-KR", "tts": "ko",
+      {
+        "t": "大家好",
+        "r": "daai6 gaa1 hou2",
+        "s": "dye gah ho",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "你好",
+          "r": "nei5 hou2",
+          "s": "nay ho",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "大家早晨",
+        "r": "daai6 gaa1 zou2 san4",
+        "s": "dye gah joe sun",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "早晨",
+          "r": "zou2 san4",
+          "s": "joe sun",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "korean",
+    "name": "Korean",
+    "own": "한국어",
+    "where": "South Korea, North Korea",
+    "lang": "ko-KR",
+    "tts": "ko",
     "tip": "Syllables are even, with no strong stress. Many Koreans use 안녕하세요 in the morning too.",
     "items": [
-      { "t": "여러분, 안녕하세요", "r": "yeoreobun, annyeonghaseyo", "s": "yuh-ruh-boon, ahn-nyuhng-ha-say-yo", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "다들 안녕", "r": "dadeul annyeong", "s": "da-deul ahn-nyuhng", "m": "Hi, all", "g": "Friends only" }
-    ] },
-  { "id": "japanese", "name": "Japanese", "own": "日本語", "where": "Japan", "lang": "ja-JP", "tts": "ja",
+      {
+        "t": "여러분, 안녕하세요",
+        "r": "yeoreobun, annyeonghaseyo",
+        "s": "yuh-ruh-boon, ahn-nyuhng-ha-say-yo",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "안녕하세요",
+          "r": "annyeonghaseyo",
+          "s": "ahn-nyuhng-ha-say-yo",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "다들 안녕",
+        "r": "dadeul annyeong",
+        "s": "da-deul ahn-nyuhng",
+        "m": "Hi, all",
+        "g": "Friends only",
+        "p": {
+          "t": "안녕",
+          "r": "annyeong",
+          "s": "ahn-nyuhng",
+          "m": "Hi",
+          "g": "Friends only"
+        }
+      }
+    ]
+  },
+  {
+    "id": "japanese",
+    "name": "Japanese",
+    "own": "日本語",
+    "where": "Japan",
+    "lang": "ja-JP",
+    "tts": "ja",
     "tip": "Every syllable gets equal weight. The final u in gozaimasu is nearly silent. The greeting changes with the time of day.",
     "items": [
-      { "t": "みなさん、こんにちは", "r": "minasan, konnichiwa", "s": "mee-nah-sahn, kon-nee-chee-wah", "m": "Hello, everyone", "g": "Daytime" },
-      { "t": "みなさん、おはようございます", "r": "minasan, ohayou gozaimasu", "s": "mee-nah-sahn, oh-hah-yoh go-zah-ee-mahs", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "tamil", "name": "Tamil", "own": "தமிழ்", "where": "Tamil Nadu, Sri Lanka, Singapore", "lang": "ta-IN", "tts": "ta",
+      {
+        "t": "みなさん、こんにちは",
+        "r": "minasan, konnichiwa",
+        "s": "mee-nah-sahn, kon-nee-chee-wah",
+        "m": "Hello, everyone",
+        "g": "Daytime",
+        "p": {
+          "t": "こんにちは",
+          "r": "konnichiwa",
+          "s": "kon-nee-chee-wah",
+          "m": "Hello",
+          "g": "Daytime"
+        }
+      },
+      {
+        "t": "みなさん、おはようございます",
+        "r": "minasan, ohayou gozaimasu",
+        "s": "mee-nah-sahn, oh-hah-yoh go-zah-ee-mahs",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "おはようございます",
+          "r": "ohayou gozaimasu",
+          "s": "oh-hah-yoh go-zah-ee-mahs",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tamil",
+    "name": "Tamil",
+    "own": "தமிழ்",
+    "where": "Tamil Nadu, Sri Lanka, Singapore",
+    "lang": "ta-IN",
+    "tts": "ta",
     "tip": "Double consonants such as kk are held a little longer than single ones.",
     "items": [
-      { "t": "எல்லோருக்கும் வணக்கம்", "r": "ellorukkum vanakkam", "s": "el-lo-rook-kum vuh-nuk-kum", "m": "Greetings, everyone", "g": "Any time" },
-      { "t": "அனைவருக்கும் வணக்கம்", "r": "anaivarukkum vanakkam", "s": "uh-nai-vuh-rook-kum vuh-nuk-kum", "m": "Greetings to all", "g": "Formal" }
-    ] },
-  { "id": "hindi", "name": "Hindi", "own": "हिन्दी", "where": "India", "lang": "hi-IN", "tts": "hi",
+      {
+        "t": "எல்லோருக்கும் வணக்கம்",
+        "r": "ellorukkum vanakkam",
+        "s": "el-lo-rook-kum vuh-nuk-kum",
+        "m": "Greetings, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "வணக்கம்",
+          "r": "vanakkam",
+          "s": "vuh-nuk-kum",
+          "m": "Greetings",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "அனைவருக்கும் வணக்கம்",
+        "r": "anaivarukkum vanakkam",
+        "s": "uh-nai-vuh-rook-kum vuh-nuk-kum",
+        "m": "Greetings to all",
+        "g": "Formal",
+        "p": {
+          "t": "உங்களுக்கு வணக்கம்",
+          "r": "ungalukku vanakkam",
+          "s": "oong-uh-luk-koo vuh-nuk-kum",
+          "m": "Greetings to you",
+          "g": "Polite"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hindi",
+    "name": "Hindi",
+    "own": "हिन्दी",
+    "where": "India",
+    "lang": "hi-IN",
+    "tts": "hi",
     "tip": "Aspirated sounds carry a puff of air: bh in sabhi is a b with a breath after it.",
     "items": [
-      { "t": "सभी को नमस्ते", "r": "sabhi ko namaste", "s": "suh-bhee ko nuh-muh-stay", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "सबको नमस्ते", "r": "sabko namaste", "s": "sub-ko nuh-muh-stay", "m": "Hello, all", "g": "Casual" }
-    ] },
-  { "id": "malay", "name": "Malay", "own": "Bahasa Melayu", "where": "Malaysia, Brunei, Singapore", "lang": "ms-MY", "tts": "ms",
+      {
+        "t": "सभी को नमस्ते",
+        "r": "sabhi ko namaste",
+        "s": "suh-bhee ko nuh-muh-stay",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "नमस्ते",
+          "r": "namaste",
+          "s": "nuh-muh-stay",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "सबको नमस्ते",
+        "r": "sabko namaste",
+        "s": "sub-ko nuh-muh-stay",
+        "m": "Hello, all",
+        "g": "Casual",
+        "p": {
+          "t": "आपको नमस्ते",
+          "r": "aapko namaste",
+          "s": "aap-ko nuh-muh-stay",
+          "m": "Hello to you",
+          "g": "Polite"
+        }
+      }
+    ]
+  },
+  {
+    "id": "malay",
+    "name": "Malay",
+    "own": "Bahasa Melayu",
+    "where": "Malaysia, Brunei, Singapore",
+    "lang": "ms-MY",
+    "tts": "ms",
     "tip": "Stress is light and even. Later in the day, swap pagi for tengah hari (midday), petang (late afternoon) or malam (night).",
     "items": [
-      { "t": "Assalamualaikum", "r": "assalamualaikum", "s": "ah-sah-lah-moo-ah-lye-koom", "m": "Peace be upon you", "g": "Muslim audience" },
-      { "t": "Selamat pagi, semua", "r": "selamat pagi, semua", "s": "suh-lah-mat pah-gee, suh-moo-ah", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "malayalam", "name": "Malayalam", "own": "മലയാളം", "where": "Kerala, India", "lang": "ml-IN", "tts": "ml",
+      {
+        "t": "Assalamualaikum",
+        "r": "assalamualaikum",
+        "s": "ah-sah-lah-moo-ah-lye-koom",
+        "m": "Peace be upon you",
+        "g": "Muslim audience",
+        "p": {
+          "t": "Salam",
+          "r": "salam",
+          "s": "sah-lahm",
+          "m": "Hello (short for assalamualaikum)",
+          "g": "Muslim audience"
+        }
+      },
+      {
+        "t": "Selamat pagi, semua",
+        "r": "selamat pagi, semua",
+        "s": "suh-lah-mat pah-gee, suh-moo-ah",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Selamat pagi",
+          "r": "selamat pagi",
+          "s": "suh-lah-mat pah-gee",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "malayalam",
+    "name": "Malayalam",
+    "own": "മലയാളം",
+    "where": "Kerala, India",
+    "lang": "ml-IN",
+    "tts": "ml",
     "tip": "Long vowels (aa) last about twice as long as short ones.",
     "items": [
-      { "t": "എല്ലാവർക്കും നമസ്കാരം", "r": "ellavarkkum namaskaram", "s": "el-lah-vark-kum nuh-muss-kah-rum", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "എല്ലാവർക്കും സുപ്രഭാതം", "r": "ellavarkkum suprabhatham", "s": "el-lah-vark-kum soo-pruh-bah-thum", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "german", "name": "German", "own": "Deutsch", "where": "Germany, Austria, Switzerland", "lang": "de-DE", "tts": "de",
+      {
+        "t": "എല്ലാവർക്കും നമസ്കാരം",
+        "r": "ellavarkkum namaskaram",
+        "s": "el-lah-vark-kum nuh-muss-kah-rum",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "നമസ്കാരം",
+          "r": "namaskaram",
+          "s": "nuh-muss-kah-rum",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "എല്ലാവർക്കും സുപ്രഭാതം",
+        "r": "ellavarkkum suprabhatham",
+        "s": "el-lah-vark-kum soo-pruh-bah-thum",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "സുപ്രഭാതം",
+          "r": "suprabhatham",
+          "s": "soo-pruh-bah-thum",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "german",
+    "name": "German",
+    "own": "Deutsch",
+    "where": "Germany, Austria, Switzerland",
+    "lang": "de-DE",
+    "tts": "de",
     "tip": "Stress falls on the capitalised syllable. Z sounds like ts, and W sounds like English V.",
     "items": [
-      { "t": "Schönen guten Tag, zusammen", "r": "Schönen guten Tag, zusammen", "s": "SHUH-nen GOO-ten TAHK, tsoo-ZAH-men", "m": "Have a good day, everyone", "g": "Daytime" },
-      { "t": "Guten Morgen, zusammen", "r": "Guten Morgen, zusammen", "s": "GOO-ten MOR-gen, tsoo-ZAH-men", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "thai", "name": "Thai", "own": "ไทย", "where": "Thailand", "lang": "th-TH", "tts": "th",
+      {
+        "t": "Schönen guten Tag, zusammen",
+        "r": "Schönen guten Tag, zusammen",
+        "s": "SHUH-nen GOO-ten TAHK, tsoo-ZAH-men",
+        "m": "Have a good day, everyone",
+        "g": "Daytime",
+        "p": {
+          "t": "Schönen guten Tag",
+          "r": "Schönen guten Tag",
+          "s": "SHUH-nen GOO-ten TAHK",
+          "m": "Have a good day",
+          "g": "Daytime"
+        }
+      },
+      {
+        "t": "Guten Morgen, zusammen",
+        "r": "Guten Morgen, zusammen",
+        "s": "GOO-ten MOR-gen, tsoo-ZAH-men",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Guten Morgen",
+          "r": "Guten Morgen",
+          "s": "GOO-ten MOR-gen",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "thai",
+    "name": "Thai",
+    "own": "ไทย",
+    "where": "Thailand",
+    "lang": "th-TH",
+    "tts": "th",
     "tip": "Add ครับ (khrap) if you are male or ค่ะ (kha) if you are female to sound polite. Thai has five tones.",
     "items": [
-      { "t": "สวัสดีทุกคนครับ", "r": "sawatdee thuk khon khrap", "s": "sah-wat-dee took kohn krap", "m": "Hello, everyone", "g": "Any time, male speaker" },
-      { "t": "สวัสดีทุกท่านครับ", "r": "sawatdee thuk than khrap", "s": "sah-wat-dee took tahn krap", "m": "Hello, everyone", "g": "Polite, male speaker" }
-    ] },
-  { "id": "spanish", "name": "Spanish", "own": "Español", "where": "Spain, Latin America", "lang": "es-ES", "tts": "es",
+      {
+        "t": "สวัสดีทุกคนครับ",
+        "r": "sawatdee thuk khon khrap",
+        "s": "sah-wat-dee took kohn krap",
+        "m": "Hello, everyone",
+        "g": "Any time, male speaker",
+        "p": {
+          "t": "สวัสดีครับ",
+          "r": "sawatdee khrap",
+          "s": "sah-wat-dee krap",
+          "m": "Hello",
+          "g": "Any time, male speaker"
+        }
+      },
+      {
+        "t": "สวัสดีทุกท่านครับ",
+        "r": "sawatdee thuk than khrap",
+        "s": "sah-wat-dee took tahn krap",
+        "m": "Hello, everyone",
+        "g": "Polite, male speaker",
+        "p": {
+          "t": "สวัสดีครับท่าน",
+          "r": "sawatdee khrap than",
+          "s": "sah-wat-dee krap tahn",
+          "m": "Hello, sir or madam",
+          "g": "Polite, male speaker"
+        }
+      }
+    ]
+  },
+  {
+    "id": "spanish",
+    "name": "Spanish",
+    "own": "Español",
+    "where": "Spain, Latin America",
+    "lang": "es-ES",
+    "tts": "es",
     "tip": "Stress falls on the capitalised syllable. Use todas instead of todos if the group is all women.",
     "items": [
-      { "t": "Hola a todos", "r": "Hola a todos", "s": "OH-lah ah TOH-dohs", "m": "Hello, everyone", "g": "Casual" },
-      { "t": "Buenos días a todos", "r": "Buenos días a todos", "s": "BWEH-nohs DEE-ahs ah TOH-dohs", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "french", "name": "French", "own": "Français", "where": "France, Canada, West Africa", "lang": "fr-FR", "tts": "fr",
+      {
+        "t": "Hola a todos",
+        "r": "Hola a todos",
+        "s": "OH-lah ah TOH-dohs",
+        "m": "Hello, everyone",
+        "g": "Casual",
+        "p": {
+          "t": "Hola",
+          "r": "Hola",
+          "s": "OH-lah",
+          "m": "Hello",
+          "g": "Casual"
+        }
+      },
+      {
+        "t": "Buenos días a todos",
+        "r": "Buenos días a todos",
+        "s": "BWEH-nohs DEE-ahs ah TOH-dohs",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Buenos días",
+          "r": "Buenos días",
+          "s": "BWEH-nohs DEE-ahs",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "french",
+    "name": "French",
+    "own": "Français",
+    "where": "France, Canada, West Africa",
+    "lang": "fr-FR",
+    "tts": "fr",
     "tip": "Final consonants are usually silent. The exception here is tous used as a pronoun, which ends in an s sound.",
     "items": [
-      { "t": "Bonjour à tous", "r": "Bonjour à tous", "s": "bohn-ZHOOR ah TOOSS", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "Salut tout le monde", "r": "Salut tout le monde", "s": "sah-LOO too luh MOHND", "m": "Hi, everybody", "g": "Casual" }
-    ] },
-  { "id": "hebrew", "name": "Hebrew", "own": "עברית", "where": "Israel", "lang": "he-IL", "tts": "iw", "rtl": true,
+      {
+        "t": "Bonjour à tous",
+        "r": "Bonjour à tous",
+        "s": "bohn-ZHOOR ah TOOSS",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "Bonjour",
+          "r": "Bonjour",
+          "s": "bohn-ZHOOR",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "Salut tout le monde",
+        "r": "Salut tout le monde",
+        "s": "sah-LOO too luh MOHND",
+        "m": "Hi, everybody",
+        "g": "Casual",
+        "p": {
+          "t": "Salut",
+          "r": "Salut",
+          "s": "sah-LOO",
+          "m": "Hi",
+          "g": "Casual"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hebrew",
+    "name": "Hebrew",
+    "own": "עברית",
+    "where": "Israel",
+    "lang": "he-IL",
+    "tts": "iw",
+    "rtl": true,
     "tip": "Use לכולן (lekulan) instead of לכולם if the group is all women. kh is the throaty sound in Scottish loch.",
     "items": [
-      { "t": "שלום לכולם", "r": "shalom lekulam", "s": "sha-LOM le-khoo-LAHM", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "בוקר טוב לכולם", "r": "boker tov lekulam", "s": "BO-ker TOV le-khoo-LAHM", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "bengali", "name": "Bengali", "own": "বাংলা", "where": "Bangladesh, West Bengal", "lang": "bn-BD", "tts": "bn",
+      {
+        "t": "שלום לכולם",
+        "r": "shalom lekulam",
+        "s": "sha-LOM le-khoo-LAHM",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "שלום",
+          "r": "shalom",
+          "s": "sha-LOM",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "בוקר טוב לכולם",
+        "r": "boker tov lekulam",
+        "s": "BO-ker TOV le-khoo-LAHM",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "בוקר טוב",
+          "r": "boker tov",
+          "s": "BO-ker TOV",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "bengali",
+    "name": "Bengali",
+    "own": "বাংলা",
+    "where": "Bangladesh, West Bengal",
+    "lang": "bn-BD",
+    "tts": "bn",
     "tip": "In a mixed Bangladeshi audience, assalamu alaikum is the most widely used opener. সবাইকে শুভ সকাল is a neutral morning alternative.",
     "items": [
-      { "t": "সবাইকে আসসালামু আলাইকুম", "r": "shobaike assalamu alaikum", "s": "sho-bye-kay as-sa-LAH-moo a-LYE-koom", "m": "Peace be upon you all", "g": "Most Muslims" },
-      { "t": "সবাইকে নমস্কার", "r": "shobaike nomoshkar", "s": "sho-bye-kay no-mosh-kar", "m": "Hello, everyone", "g": "Most Hindus" }
-    ] },
-  { "id": "tagalog", "name": "Tagalog", "own": "Filipino", "where": "Philippines", "lang": "fil-PH", "tts": "tl",
+      {
+        "t": "সবাইকে আসসালামু আলাইকুম",
+        "r": "shobaike assalamu alaikum",
+        "s": "sho-bye-kay as-sa-LAH-moo a-LYE-koom",
+        "m": "Peace be upon you all",
+        "g": "Most Muslims",
+        "p": {
+          "t": "আসসালামু আলাইকুম",
+          "r": "assalamu alaikum",
+          "s": "as-sa-LAH-moo a-LYE-koom",
+          "m": "Peace be upon you",
+          "g": "Most Muslims"
+        }
+      },
+      {
+        "t": "সবাইকে নমস্কার",
+        "r": "shobaike nomoshkar",
+        "s": "sho-bye-kay no-mosh-kar",
+        "m": "Hello, everyone",
+        "g": "Most Hindus",
+        "p": {
+          "t": "নমস্কার",
+          "r": "nomoshkar",
+          "s": "no-mosh-kar",
+          "m": "Hello",
+          "g": "Most Hindus"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tagalog",
+    "name": "Tagalog",
+    "own": "Filipino",
+    "where": "Philippines",
+    "lang": "fil-PH",
+    "tts": "tl",
     "tip": "Stress is on the second-to-last syllable in most words. Add po to be respectful to elders: Kumusta po kayong lahat.",
     "items": [
-      { "t": "Kumusta kayong lahat", "r": "Kumusta kayong lahat", "s": "koo-moos-TAH kah-YONG LAH-hat", "m": "How are you all? (hello, everyone)", "g": "Any time" },
-      { "t": "Magandang umaga sa inyong lahat", "r": "Magandang umaga sa inyong lahat", "s": "mah-gahn-DAHNG oo-MAH-gah sah ee-NYONG LAH-hat", "m": "Good morning to you all", "g": "Morning" }
-    ] },
-  { "id": "vietnamese", "name": "Vietnamese", "own": "Tiếng Việt", "where": "Vietnam", "lang": "vi-VN", "tts": "vi",
+      {
+        "t": "Kumusta kayong lahat",
+        "r": "Kumusta kayong lahat",
+        "s": "koo-moos-TAH kah-YONG LAH-hat",
+        "m": "How are you all? (hello, everyone)",
+        "g": "Any time",
+        "p": {
+          "t": "Kumusta ka",
+          "r": "Kumusta ka",
+          "s": "koo-moos-TAH kah",
+          "m": "How are you? (hello)",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "Magandang umaga sa inyong lahat",
+        "r": "Magandang umaga sa inyong lahat",
+        "s": "mah-gahn-DAHNG oo-MAH-gah sah ee-NYONG LAH-hat",
+        "m": "Good morning to you all",
+        "g": "Morning",
+        "p": {
+          "t": "Magandang umaga",
+          "r": "Magandang umaga",
+          "s": "mah-gahn-DAHNG oo-MAH-gah",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "vietnamese",
+    "name": "Vietnamese",
+    "own": "Tiếng Việt",
+    "where": "Vietnam",
+    "lang": "vi-VN",
+    "tts": "vi",
     "tip": "Six tones, marked by the accents on each vowel. Mọi người means everyone; các bạn means you all, among peers.",
     "items": [
-      { "t": "Xin chào mọi người", "r": "Xin chào mọi người", "s": "sin chow moy ngoo-ee", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "Chào các bạn", "r": "Chào các bạn", "s": "chow kahk bahn", "m": "Hello, you all", "g": "Peers, casual" }
-    ] },
-  { "id": "maori", "name": "Māori", "own": "Te Reo Māori", "where": "New Zealand", "lang": "mi-NZ", "tts": null,
+      {
+        "t": "Xin chào mọi người",
+        "r": "Xin chào mọi người",
+        "s": "sin chow moy ngoo-ee",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "Xin chào",
+          "r": "Xin chào",
+          "s": "sin chow",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "Chào các bạn",
+        "r": "Chào các bạn",
+        "s": "chow kahk bahn",
+        "m": "Hello, you all",
+        "g": "Peers, casual",
+        "p": {
+          "t": "Chào bạn",
+          "r": "Chào bạn",
+          "s": "chow bahn",
+          "m": "Hello, friend",
+          "g": "Peers, casual"
+        }
+      }
+    ]
+  },
+  {
+    "id": "maori",
+    "name": "Māori",
+    "own": "Te Reo Māori",
+    "where": "New Zealand",
+    "lang": "mi-NZ",
+    "tts": null,
     "tip": "A macron (ā, ē) makes a vowel longer. Koutou is for three or more people; say korua for two.",
     "items": [
-      { "t": "Kia ora koutou", "r": "Kia ora koutou", "s": "KEE-ah OH-rah KOH-toh", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "Tēnā koutou katoa", "r": "Tēnā koutou katoa", "s": "TEH-nah KOH-toh KAH-toh-ah", "m": "Greetings to you all", "g": "Formal" }
-    ] },
-  { "id": "afrikaans", "name": "Afrikaans", "own": "Afrikaans", "where": "South Africa, Namibia", "lang": "af-ZA", "tts": "af",
+      {
+        "t": "Kia ora koutou",
+        "r": "Kia ora koutou",
+        "s": "KEE-ah OH-rah KOH-toh",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "Kia ora",
+          "r": "Kia ora",
+          "s": "KEE-ah OH-rah",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "Tēnā koutou katoa",
+        "r": "Tēnā koutou katoa",
+        "s": "TEH-nah KOH-toh KAH-toh-ah",
+        "m": "Greetings to you all",
+        "g": "Formal",
+        "p": {
+          "t": "Tēnā koe",
+          "r": "Tēnā koe",
+          "s": "TEH-nah KWAY",
+          "m": "Greetings to you",
+          "g": "Formal"
+        }
+      }
+    ]
+  },
+  {
+    "id": "afrikaans",
+    "name": "Afrikaans",
+    "own": "Afrikaans",
+    "where": "South Africa, Namibia",
+    "lang": "af-ZA",
+    "tts": "af",
     "tip": "G is the throaty kh sound, as in Scottish loch. Almal means everyone.",
     "items": [
-      { "t": "Goeiedag, almal", "r": "Goeiedag, almal", "s": "KHOO-yuh-dahkh, AHL-mahl", "m": "Good day, everyone", "g": "Any time" },
-      { "t": "Goeie môre, almal", "r": "Goeie môre, almal", "s": "KHOO-yuh MOH-ruh, AHL-mahl", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "samoan", "name": "Samoan", "own": "Gagana Sāmoa", "where": "Samoa, American Samoa, New Zealand", "lang": "sm-WS", "tts": null,
-    "tip": "Every vowel is pronounced, and ā marks a long one. Outou is you (three or more); uma means all. Ng is a single sound, like the end of sing.",
+      {
+        "t": "Goeiedag, almal",
+        "r": "Goeiedag, almal",
+        "s": "KHOO-yuh-dahkh, AHL-mahl",
+        "m": "Good day, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "Goeiedag",
+          "r": "Goeiedag",
+          "s": "KHOO-yuh-dahkh",
+          "m": "Good day",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "Goeie môre, almal",
+        "r": "Goeie môre, almal",
+        "s": "KHOO-yuh MOH-ruh, AHL-mahl",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Goeie môre",
+          "r": "Goeie môre",
+          "s": "KHOO-yuh MOH-ruh",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "samoan",
+    "name": "Samoan",
+    "own": "Gagana Sāmoa",
+    "where": "Samoa, American Samoa, New Zealand",
+    "lang": "sm-WS",
+    "tts": null,
+    "tip": "Every vowel is pronounced, and ā marks a long one. Lava adds respect, so Talofa lava is the full, polite hello. Ng is a single sound, like the end of sing.",
     "items": [
-      { "t": "Talofa i outou uma", "r": "Talofa i outou uma", "s": "tah-LOH-fah ee OH-toh OO-mah", "m": "Hello to you all", "g": "Any time" },
-      { "t": "Manuia le taeao", "r": "Manuia le taeao", "s": "mah-noo-EE-ah leh tah-eh-AH-oh", "m": "Good morning", "g": "Morning" }
-    ] },
-  { "id": "dutch", "name": "Dutch", "own": "Nederlands", "where": "Netherlands, Belgium, Suriname", "lang": "nl-NL", "tts": "nl",
+      {
+        "t": "Talofa lava",
+        "r": "Talofa lava",
+        "s": "tah-LOH-fah LAH-vah",
+        "m": "Hello (respectful)",
+        "g": "Any time",
+        "p": {
+          "t": "Talofa",
+          "r": "Talofa",
+          "s": "tah-LOH-fah",
+          "m": "Hello",
+          "g": "Casual"
+        }
+      },
+      {
+        "t": "Manuia le taeao",
+        "r": "Manuia le taeao",
+        "s": "mah-noo-EE-ah leh tah-eh-AH-oh",
+        "m": "Good morning",
+        "g": "Morning",
+        "p": {
+          "t": "Manuia le taeao",
+          "r": "Manuia le taeao",
+          "s": "mah-noo-EE-ah leh tah-eh-AH-oh",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dutch",
+    "name": "Dutch",
+    "own": "Nederlands",
+    "where": "Netherlands, Belgium, Suriname",
+    "lang": "nl-NL",
+    "tts": "nl",
     "tip": "G is a throaty kh sound, like Scottish loch. Allemaal means everyone, all together. Goedemorgen is written as one word.",
     "items": [
-      { "t": "Hallo allemaal", "r": "Hallo allemaal", "s": "HAH-loh AH-luh-mahl", "m": "Hello, everyone", "g": "Casual" },
-      { "t": "Goedemorgen allemaal", "r": "Goedemorgen allemaal", "s": "KHOO-duh-MOR-khuh AH-luh-mahl", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "portuguese", "name": "Portuguese", "own": "Português", "where": "Portugal, Brazil", "lang": "pt-PT", "tts": "pt",
+      {
+        "t": "Hallo allemaal",
+        "r": "Hallo allemaal",
+        "s": "HAH-loh AH-luh-mahl",
+        "m": "Hello, everyone",
+        "g": "Casual",
+        "p": {
+          "t": "Hallo",
+          "r": "Hallo",
+          "s": "HAH-loh",
+          "m": "Hello",
+          "g": "Casual"
+        }
+      },
+      {
+        "t": "Goedemorgen allemaal",
+        "r": "Goedemorgen allemaal",
+        "s": "KHOO-duh-MOR-khuh AH-luh-mahl",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Goedemorgen",
+          "r": "Goedemorgen",
+          "s": "KHOO-duh-MOR-khuh",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "portuguese",
+    "name": "Portuguese",
+    "own": "Português",
+    "where": "Portugal, Brazil",
+    "lang": "pt-PT",
+    "tts": "pt",
     "tip": "Stress falls on the capitalised syllable. Use todas instead of todos if the group is all women. Brazilian speakers say TOH-dohs; Portuguese speakers say TOH-doosh.",
     "items": [
-      { "t": "Olá a todos", "r": "Olá a todos", "s": "oh-LAH ah TOH-doosh", "m": "Hello, everyone", "g": "Any time" },
-      { "t": "Bom dia a todos", "r": "Bom dia a todos", "s": "bohm DEE-ah ah TOH-doosh", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "italian", "name": "Italian", "own": "Italiano", "where": "Italy, Switzerland", "lang": "it-IT", "tts": "it",
+      {
+        "t": "Olá a todos",
+        "r": "Olá a todos",
+        "s": "oh-LAH ah TOH-doosh",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "Olá",
+          "r": "Olá",
+          "s": "oh-LAH",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "Bom dia a todos",
+        "r": "Bom dia a todos",
+        "s": "bohm DEE-ah ah TOH-doosh",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Bom dia",
+          "r": "Bom dia",
+          "s": "bohm DEE-ah",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "italian",
+    "name": "Italian",
+    "own": "Italiano",
+    "where": "Italy, Switzerland",
+    "lang": "it-IT",
+    "tts": "it",
     "tip": "Double consonants such as tt are held longer than single ones. Use a tutte instead of a tutti if the group is all women.",
     "items": [
-      { "t": "Ciao a tutti", "r": "Ciao a tutti", "s": "CHOW ah TOO-tee", "m": "Hello, everyone", "g": "Casual" },
-      { "t": "Buongiorno a tutti", "r": "Buongiorno a tutti", "s": "bwohn-JOR-no ah TOO-tee", "m": "Good morning, everyone", "g": "Morning" }
-    ] },
-  { "id": "russian", "name": "Russian", "own": "Русский", "where": "Russia, Belarus, Kazakhstan", "lang": "ru-RU", "tts": "ru",
+      {
+        "t": "Ciao a tutti",
+        "r": "Ciao a tutti",
+        "s": "CHOW ah TOO-tee",
+        "m": "Hello, everyone",
+        "g": "Casual",
+        "p": {
+          "t": "Ciao",
+          "r": "Ciao",
+          "s": "CHOW",
+          "m": "Hello",
+          "g": "Casual"
+        }
+      },
+      {
+        "t": "Buongiorno a tutti",
+        "r": "Buongiorno a tutti",
+        "s": "bwohn-JOR-no ah TOO-tee",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Buongiorno",
+          "r": "Buongiorno",
+          "s": "bwohn-JOR-no",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "russian",
+    "name": "Russian",
+    "own": "Русский",
+    "where": "Russia, Belarus, Kazakhstan",
+    "lang": "ru-RU",
+    "tts": "ru",
     "tip": "Unstressed o sounds like ah, so Доброе is DOH-bruh-yeh.",
     "items": [
-      { "t": "Всем привет", "r": "Vsem privet", "s": "fsyem pree-VYET", "m": "Hello, everyone", "g": "Casual" },
-      { "t": "Доброе утро всем", "r": "Dobroye utro vsem", "s": "DOH-bruh-yeh OO-truh fsyem", "m": "Good morning, everyone", "g": "Morning" }
-    ] }
+      {
+        "t": "Всем привет",
+        "r": "Vsem privet",
+        "s": "fsyem pree-VYET",
+        "m": "Hello, everyone",
+        "g": "Casual",
+        "p": {
+          "t": "Привет",
+          "r": "Privet",
+          "s": "pree-VYET",
+          "m": "Hello",
+          "g": "Casual"
+        }
+      },
+      {
+        "t": "Доброе утро всем",
+        "r": "Dobroye utro vsem",
+        "s": "DOH-bruh-yeh OO-truh fsyem",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "Доброе утро",
+          "r": "Dobroye utro",
+          "s": "DOH-bruh-yeh OO-truh",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  },
+  {
+    "id": "farsi",
+    "name": "Farsi",
+    "own": "فارسی",
+    "where": "Iran, Afghanistan (Dari), Tajikistan (Tajik)",
+    "lang": "fa-IR",
+    "tts": null,
+    "rtl": true,
+    "tip": "Also called Persian. kh is the throaty sound in Scottish loch. Stress usually falls on the last syllable. Afghans speak Dari and Tajiks speak Tajik, close relatives with their own accents.",
+    "items": [
+      {
+        "t": "سلام به همه",
+        "r": "salām be hame",
+        "s": "sah-LAHM beh hah-MEH",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "سلام",
+          "r": "salām",
+          "s": "sah-LAHM",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "صبح همه بخیر",
+        "r": "sobh-e hame bekheyr",
+        "s": "sobh-eh hah-meh beh-KHAYR",
+        "m": "Good morning, everyone",
+        "g": "Morning",
+        "p": {
+          "t": "صبح بخیر",
+          "r": "sobh bekheyr",
+          "s": "sobh beh-KHAYR",
+          "m": "Good morning",
+          "g": "Morning"
+        }
+      }
+    ]
+  }
 ]

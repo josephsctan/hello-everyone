@@ -167,6 +167,7 @@ button { font: inherit; color: inherit; }
   min-height: 2.75rem;
 }
 .seg button[aria-pressed="true"] { background: var(--badge); color: var(--badge-fg); }
+.seg.who { grid-template-columns: repeat(2, 1fr); }
 .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
 .caption { flex: 1 1 16rem; min-width: 0; margin: 0; color: var(--muted); font-size: 0.92rem; }
 .pill {
@@ -269,6 +270,10 @@ button { font: inherit; color: inherit; }
       <button type="button" data-mode="script" aria-pressed="false">See script</button>
       <button type="button" data-mode="english" aria-pressed="false">See English</button>
     </div>
+    <div class="seg who" role="group" aria-label="Greet">
+      <button type="button" data-who="all" aria-pressed="true">Everyone</button>
+      <button type="button" data-who="one" aria-pressed="false">One person</button>
+    </div>
     <div class="tools">
       <p class="caption" id="caption"></p>
       <button type="button" class="pill" id="reset">Clear progress</button>
@@ -298,7 +303,7 @@ button { font: inherit; color: inherit; }
   };
   var STORE = "hello-everyone-learned-v2";
 
-  var state = { mode: "study", lang: LANGS[0].id, open: {}, learned: {} };
+  var state = { mode: "study", who: "all", lang: LANGS[0].id, open: {}, learned: {} };
 
   var fromHash = location.hash.slice(1);
   if (LANGS.some(function (l) { return l.id === fromHash; })) state.lang = fromHash;
@@ -307,7 +312,9 @@ button { font: inherit; color: inherit; }
   function persist() { try { localStorage.setItem(STORE, JSON.stringify(state.learned)); } catch (e) {} }
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-  function keyOf(l, i) { return l.id + ":" + i; }
+  // Every greeting has a version for everyone ("all") and one for a single person ("one"), keyed id:i and id:ip.
+  function keyOf(l, i, who) { return l.id + ":" + i + ((who || state.who) === "one" ? "p" : ""); }
+  function shown(l, i) { return state.who === "one" ? l.items[i].p : l.items[i]; }
 
   var ICON_SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
   var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/></svg>';
@@ -315,7 +322,7 @@ button { font: inherit; color: inherit; }
   function currentLang() { return LANGS.filter(function (l) { return l.id === state.lang; })[0]; }
 
   function rowHtml(l, i) {
-    var it = l.items[i], key = keyOf(l, i);
+    var it = shown(l, i), key = keyOf(l, i);
     var practice = state.mode !== "study";
     var open = !!state.open[key];
     var hidden = practice && !open;
@@ -355,29 +362,38 @@ button { font: inherit; color: inherit; }
       '</section>';
     main.className = (state.mode !== "study" ? "practice " : "") + "mode-" + state.mode;
     document.getElementById("caption").textContent = CAPTIONS[state.mode];
-    Array.prototype.forEach.call(document.querySelectorAll(".seg button"), function (b) {
+    Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-mode]"), function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === state.mode));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-who]"), function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-who") === state.who));
     });
     renderMenu();
     updateProgress();
   }
 
+  function learnedCount(l) {
+    var d = 0;
+    l.items.forEach(function (_, i) { ["all", "one"].forEach(function (w) { if (state.learned[keyOf(l, i, w)]) d++; }); });
+    return d;
+  }
+
   function renderMenu() {
     document.getElementById("menu").innerHTML = LANGS.map(function (l) {
-      var d = l.items.filter(function (_, i) { return state.learned[keyOf(l, i)]; }).length;
-      var all = d === l.items.length;
+      var d = learnedCount(l);
+      var all = d === l.items.length * 2;
       return '<li><button type="button" data-lang="' + l.id + '" class="' + (all ? "done" : "") + '" aria-current="' + (l.id === state.lang) + '">' +
-        '<span class="nm">' + esc(l.name) + '</span><span class="ct">' + d + ' / ' + l.items.length + '</span></button></li>';
+        '<span class="nm">' + esc(l.name) + '</span><span class="ct">' + d + ' / ' + l.items.length * 2 + '</span></button></li>';
     }).join("");
   }
 
   function updateProgress() {
     var total = 0, done = 0;
     LANGS.forEach(function (l) {
-      var d = 0;
-      l.items.forEach(function (_, i) { total++; if (state.learned[keyOf(l, i)]) { d++; done++; } });
+      var d = learnedCount(l);
+      total += l.items.length * 2; done += d;
       var el = document.querySelector('[data-count="' + l.id + '"]');
-      if (el) el.textContent = d + " / " + l.items.length;
+      if (el) el.textContent = d + " / " + l.items.length * 2;
     });
     document.getElementById("meter").style.width = (total ? (done / total) * 100 : 0) + "%";
     document.getElementById("progText").textContent = done + " of " + total + " learned";
@@ -405,7 +421,7 @@ button { font: inherit; color: inherit; }
     a.onended = function () { if (player === a) stopPlayer(); };
     a.onerror = function () { if (player === a) stopPlayer(); toast("Audio can't play in this browser."); };
     var p = a.play();
-    if (p && p.catch) p.catch(function () { if (player === a) stopPlayer(); toast("Audio can't play in this browser."); });
+    if (p && p.catch) p.catch(function () { if (player !== a) return; stopPlayer(); toast("Audio can't play in this browser."); });
   }
 
   /* Events */
@@ -438,7 +454,9 @@ button { font: inherit; color: inherit; }
       render();
       return;
     }
-    var seg = e.target.closest(".seg button");
+    var who = e.target.closest(".seg button[data-who]");
+    if (who) { stopPlayer(); state.who = who.getAttribute("data-who"); state.open = {}; render(); return; }
+    var seg = e.target.closest(".seg button[data-mode]");
     if (seg) { state.mode = seg.getAttribute("data-mode"); state.open = {}; render(); return; }
     var content = e.target.closest(".practice .content");
     if (content) { toggleOpen(content.closest(".row")); }

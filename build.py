@@ -38,16 +38,24 @@ def fetch(tts, text, dest):
 audio = {}
 for l in langs:
     for i, it in enumerate(l["items"]):
-        key = f'{l["id"]}:{i}'
-        f = AUDIO_DIR / f'{l["id"]}_{i}.mp3'
-        if not f.exists():
-            if not l["tts"]:
-                print("no audio for", f.name, "(language not supported by Google TTS; drop an mp3 in audio/ to add one)")
+        # Each item has a greeting for everyone and a "p" one for a single person.
+        for suffix, variant in (("", it), ("p", it.get("p"))):
+            if not variant:
                 continue
-            fetch(l["tts"], it["t"], f)
-            print("downloaded", f.name)
-            time.sleep(0.5)
-        audio[key] = base64.b64encode(f.read_bytes()).decode("ascii")
+            key = f'{l["id"]}:{i}{suffix}'
+            f = AUDIO_DIR / f'{l["id"]}_{i}{suffix}.mp3'
+            if not f.exists():
+                if not l["tts"]:
+                    print("no audio for", f.name, "(language not supported by Google TTS; drop an mp3 in audio/ to add one)")
+                    continue
+                try:
+                    fetch(l["tts"], variant["t"], f)
+                except Exception as e:
+                    print("FAILED", f.name, "-", e)
+                    continue
+                print("downloaded", f.name)
+                time.sleep(0.5)
+            audio[key] = base64.b64encode(f.read_bytes()).decode("ascii")
 
 html = (ROOT / "hello-everyone.src.html").read_text(encoding="utf-8")
 
