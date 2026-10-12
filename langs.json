@@ -231,6 +231,13 @@
           "m": "Greetings to you",
           "g": "Polite"
         }
+      },
+      {
+        "t": "வணக்கம், உங்களைச் சந்தித்ததில் மகிழ்ச்சி",
+        "r": "vanakkam, ungalaich santhithathil magizhchi",
+        "s": "vuh-nuk-kum, oong-uh-laich sun-thith-thuh-thil muh-gizh-chee",
+        "m": "Hello, nice to meet you",
+        "g": "Polite"
       }
     ]
   },
@@ -270,6 +277,13 @@
           "m": "Hello to you",
           "g": "Polite"
         }
+      },
+      {
+        "t": "नमस्कार, आपसे मिलकर अच्छा लगा",
+        "r": "namaskar, aapse milkar achha laga",
+        "s": "nuh-mus-kar, aap-say mil-kar uch-chah lah-gah",
+        "m": "Hello, nice to meet you",
+        "g": "Polite"
       }
     ]
   },
@@ -974,6 +988,38 @@
           "m": "Good morning",
           "g": "Morning"
         }
+      }
+    ]
+  },
+  {
+    "id": "marathi",
+    "name": "Marathi",
+    "own": "मराठी",
+    "where": "Maharashtra, India",
+    "lang": "mr-IN",
+    "tts": "mr",
+    "tip": "Aspirated sounds such as bh and jh carry a puff of air. Tumhala is the polite you, and it works for one person or a group.",
+    "items": [
+      {
+        "t": "सर्वांना नमस्कार",
+        "r": "sarvanna namaskar",
+        "s": "sur-vahn-NAH nuh-mus-kar",
+        "m": "Hello, everyone",
+        "g": "Any time",
+        "p": {
+          "t": "नमस्कार",
+          "r": "namaskar",
+          "s": "nuh-mus-kar",
+          "m": "Hello",
+          "g": "Any time"
+        }
+      },
+      {
+        "t": "नमस्कार, तुम्हाला भेटून आनंद झाला.",
+        "r": "namaskar, tumhala bhetun anand jhala",
+        "s": "nuh-mus-kar, toom-HAH-lah bheh-toon AH-nund JHAH-lah",
+        "m": "Hello, pleased to meet you",
+        "g": "Polite"
       }
     ]
   }

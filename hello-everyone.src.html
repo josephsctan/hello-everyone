@@ -313,8 +313,10 @@ button { font: inherit; color: inherit; }
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   // Every greeting has a version for everyone ("all") and one for a single person ("one"), keyed id:i and id:ip.
-  function keyOf(l, i, who) { return l.id + ":" + i + ((who || state.who) === "one" ? "p" : ""); }
-  function shown(l, i) { return state.who === "one" ? l.items[i].p : l.items[i]; }
+  // An item with no "p" version (a single phrase that suits both) uses the same key and text in both views.
+  function keyOf(l, i, who) { return l.id + ":" + i + ((who || state.who) === "one" && l.items[i].p ? "p" : ""); }
+  function shown(l, i) { return state.who === "one" && l.items[i].p ? l.items[i].p : l.items[i]; }
+  function totalOf(l) { return l.items.reduce(function (n, it) { return n + (it.p ? 2 : 1); }, 0); }
 
   var ICON_SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
   var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/></svg>';
@@ -373,17 +375,17 @@ button { font: inherit; color: inherit; }
   }
 
   function learnedCount(l) {
-    var d = 0;
-    l.items.forEach(function (_, i) { ["all", "one"].forEach(function (w) { if (state.learned[keyOf(l, i, w)]) d++; }); });
-    return d;
+    var seen = {};
+    l.items.forEach(function (_, i) { ["all", "one"].forEach(function (w) { var k = keyOf(l, i, w); if (state.learned[k]) seen[k] = true; }); });
+    return Object.keys(seen).length;
   }
 
   function renderMenu() {
     document.getElementById("menu").innerHTML = LANGS.map(function (l) {
       var d = learnedCount(l);
-      var all = d === l.items.length * 2;
+      var all = d === totalOf(l);
       return '<li><button type="button" data-lang="' + l.id + '" class="' + (all ? "done" : "") + '" aria-current="' + (l.id === state.lang) + '">' +
-        '<span class="nm">' + esc(l.name) + '</span><span class="ct">' + d + ' / ' + l.items.length * 2 + '</span></button></li>';
+        '<span class="nm">' + esc(l.name) + '</span><span class="ct">' + d + ' / ' + totalOf(l) + '</span></button></li>';
     }).join("");
   }
 
@@ -391,9 +393,9 @@ button { font: inherit; color: inherit; }
     var total = 0, done = 0;
     LANGS.forEach(function (l) {
       var d = learnedCount(l);
-      total += l.items.length * 2; done += d;
+      total += totalOf(l); done += d;
       var el = document.querySelector('[data-count="' + l.id + '"]');
-      if (el) el.textContent = d + " / " + l.items.length * 2;
+      if (el) el.textContent = d + " / " + totalOf(l);
     });
     document.getElementById("meter").style.width = (total ? (done / total) * 100 : 0) + "%";
     document.getElementById("progText").textContent = done + " of " + total + " learned";
