@@ -20,6 +20,9 @@
   --badge-fg: #FFFFFF;
   --good: #1B7F55;
   --good-bg: #DDF1E7;
+  --good-fg: #FFFFFF;
+  --open: #0B7FC7;
+  --open-fg: #FFFFFF;
   --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-script: "Noto Sans", "Segoe UI", system-ui, -apple-system, "Hiragino Sans", "PingFang SC", "Malgun Gothic", "Noto Sans Tamil", "Noto Sans Devanagari", "Noto Sans Malayalam", "Noto Sans Thai", "Noto Sans Hebrew", "Noto Sans Bengali", sans-serif;
@@ -36,6 +39,9 @@
     --badge-fg: #FFFFFF;
     --good: #4CC38A;
     --good-bg: #17382A;
+    --good-fg: #08150F;
+    --open: #4DB3F0;
+    --open-fg: #07151F;
     color-scheme: dark;
   }
 }
@@ -50,6 +56,9 @@
   --badge-fg: #FFFFFF;
   --good: #4CC38A;
   --good-bg: #17382A;
+    --good-fg: #08150F;
+    --open: #4DB3F0;
+    --open-fg: #07151F;
   color-scheme: dark;
 }
 
@@ -140,8 +149,6 @@ button { font: inherit; color: inherit; }
 .menu button[aria-current="true"] { background: var(--badge); color: var(--badge-fg); }
 .menu .nm { flex: 1; min-width: 0; }
 .menu .ct { font-size: 0.78rem; opacity: 0.75; font-variant-numeric: tabular-nums; }
-.menu .done .ct { color: var(--good); opacity: 1; font-weight: 600; }
-.menu [aria-current="true"].done .ct { color: inherit; }
 .prog { padding: 0 1rem 1rem; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .meter { height: 6px; border-radius: 99px; background: var(--soft); overflow: hidden; }
 .meter span { display: block; height: 100%; width: 0; background: var(--good); transition: width 0.25s ease; }
@@ -201,7 +208,7 @@ button { font: inherit; color: inherit; }
 .tag { background: var(--soft); color: var(--muted); border-radius: 99px; padding: 0.05rem 0.6rem; font-size: 0.78rem; font-weight: 500; }
 
 
-.acts { display: grid; grid-template-columns: repeat(2, auto); gap: 0.1rem; justify-items: center; }
+.acts { display: grid; gap: 0.1rem; justify-items: center; }
 .icon {
   width: 2.75rem; height: 2.75rem;
   display: grid; place-items: center;
@@ -211,7 +218,6 @@ button { font: inherit; color: inherit; }
 .icon:hover { background: var(--soft); color: var(--fg); }
 .icon svg { width: 1.35rem; height: 1.35rem; display: block; }
 .icon.speaking { background: var(--soft); color: var(--badge); }
-.icon.learn[aria-pressed="true"] { background: var(--good-bg); color: var(--good); }
 
 .toast {
   position: fixed;
@@ -229,11 +235,55 @@ button { font: inherit; color: inherit; }
 .foot { color: var(--muted); font-size: 0.82rem; margin: 0; }
 @media (prefers-reduced-motion: reduce) { .meter span { transition: none; } }
 
+/* Study button and the full-screen study view */
+.study-btn {
+  margin: 0 0.75rem;
+  min-height: 3rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--good);
+  color: var(--good-fg);
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+.study-btn:hover { filter: brightness(1.08); }
+.study { position: fixed; inset: 0; z-index: 20; background: var(--bg); overflow-y: auto; }
+.study[hidden] { display: none; }
+.study-inner { max-width: 40rem; margin-inline: auto; padding: 1rem 1rem 3rem; display: flex; flex-direction: column; gap: 1rem; }
+#studyBody { display: flex; flex-direction: column; gap: 1rem; }
+.study:focus { outline: none; }
+.study-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; color: var(--muted); font-size: 0.9rem; }
+.flash { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.flash-top { display: flex; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; color: var(--muted); font-size: 0.85rem; margin-bottom: 0.4rem; }
+.flash-lang { font-family: var(--font-display); font-weight: 800; color: var(--fg); font-size: 1.05rem; }
+.flash-lang .own { font-family: var(--font-script); font-weight: 400; color: var(--muted); font-size: 0.9rem; }
+.flash .native { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+.flash-audio { margin-top: 0.4rem; }
+.flash.result { text-align: center; align-items: center; }
+.flash.result h2 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; }
+.flash.result p { margin: 0; }
+.big-score { font-family: var(--font-display); font-weight: 800; font-size: 3.5rem; line-height: 1.1; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.results { list-style: none; margin: 0.5rem 0; padding: 0; width: 100%; text-align: left; font-variant-numeric: tabular-nums; }
+.results li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.4rem 0; border-top: 1px solid var(--line); }
+.study-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.study-actions.one { grid-template-columns: 1fr; }
+.big { min-height: 3.25rem; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-weight: 600; font-size: 1.05rem; cursor: pointer; }
+.big.ok { background: var(--good); border-color: var(--good); color: var(--good-fg); }
+.big.open { background: var(--open); border-color: var(--open); color: var(--open-fg); }
+.big:disabled { opacity: 0.4; cursor: default; }
+.study-actions.three { grid-template-columns: repeat(3, 1fr); }
+.flash .prompt { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.8rem, 7vw, 2.6rem); line-height: 1.15; }
+.flash .answer { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.6rem; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+.big.bad { background: var(--badge); border-color: var(--badge); color: var(--badge-fg); }
+
 /* Narrow screens: the left panel becomes a strip across the top. */
 @media (max-width: 46rem) {
   .layout { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
   .side { position: sticky; top: 0; z-index: 5; max-height: none; flex-direction: row; align-items: center; gap: 0; border-radius: 12px; }
   .badge { display: none; }
+  .study-btn { flex: none; margin: 0.4rem 0 0.4rem 0.4rem; padding: 0 1.1rem; min-height: 2.75rem; }
   .prog { display: none; }
   .menu { display: flex; gap: 0.25rem; overflow-x: auto; overflow-y: hidden; padding: 0.4rem; }
   .menu li { flex: none; }
@@ -250,10 +300,11 @@ button { font: inherit; color: inherit; }
     <div class="badge">
       <h1><span class="hello">Hello</span><span class="who">everyone<span class="sr">.</span></span></h1>
     </div>
+    <button type="button" class="study-btn" id="studyBtn">Study</button>
     <ul class="menu" id="menu" aria-label="Languages"></ul>
     <div class="prog">
       <div class="meter" aria-hidden="true"><span id="meter"></span></div>
-      <span id="progText" aria-live="polite">0 of 0 learned</span>
+      <span id="progText" aria-live="polite"></span>
     </div>
   </aside>
 
@@ -265,12 +316,19 @@ button { font: inherit; color: inherit; }
     </div>
     <div class="tools">
       <p class="caption">Read each greeting, listen to it, and say it out loud.</p>
-      <button type="button" class="pill" id="reset">Clear progress</button>
+      <button type="button" class="pill" id="reset">Reset scores</button>
     </div>
 
     <main id="langs"></main>
 
-    <p class="foot">Respellings are English approximations. The speaker button plays a recording saved inside this file, so it works offline. Tick the circle on a greeting once you can say it without help.</p>
+    <p class="foot">Respellings are English approximations. The speaker button plays a recording saved inside this file, so it works offline. Press Study to practise one group of languages at a time.</p>
+  </div>
+</div>
+<div class="study" id="study" role="dialog" aria-modal="true" aria-label="Study" tabindex="-1" hidden>
+  <div class="study-inner">
+    <div class="study-top"><span id="studyCrumb"></span><button type="button" class="pill" id="studyClose">Close</button></div>
+    <div class="meter" aria-hidden="true"><span id="studyMeter"></span></div>
+    <div id="studyBody"></div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -285,31 +343,76 @@ button { font: inherit; color: inherit; }
   var AUDIO = {};
   /*END AUDIO*/
 
-  var STORE = "hello-everyone-learned-v2";
+  var OLD_STORE = "hello-everyone-learned-v2";
+  var STORE = "hello-everyone-study-v1";
+  var GROUPS = 5;
 
-  var state = { who: "all", lang: LANGS[0].id, learned: {} };
+  var state = { who: "all", lang: LANGS[0].id };
 
   var fromHash = location.hash.slice(1);
   if (LANGS.some(function (l) { return l.id === fromHash; })) state.lang = fromHash;
 
-  try { var saved = localStorage.getItem(STORE); if (saved) state.learned = JSON.parse(saved) || {}; } catch (e) {}
-  function persist() { try { localStorage.setItem(STORE, JSON.stringify(state.learned)); } catch (e) {} }
-
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
-  // Every greeting has a version for everyone ("all") and one for a single person ("one"), keyed id:i and id:ip.
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function langById(id) { return LANGS.filter(function (l) { return l.id === id; })[0]; }
+  function currentLang() { return langById(state.lang); }
+
+  // Every greeting has a version for everyone and one for a single person ("p"), keyed id:i and id:ip.
   // An item with no "p" version (a single phrase that suits both) uses the same key and text in both views.
-  function keyOf(l, i, who) { return l.id + ":" + i + ((who || state.who) === "one" && l.items[i].p ? "p" : ""); }
+  function keyOf(l, i) { return l.id + ":" + i + (state.who === "one" && l.items[i].p ? "p" : ""); }
   function shown(l, i) { return state.who === "one" && l.items[i].p ? l.items[i].p : l.items[i]; }
-  function totalOf(l) { return l.items.reduce(function (n, it) { return n + (it.p ? 2 : 1); }, 0); }
+  // Every distinct greeting in a language, for the study test.
+  function greetingsOf(l) {
+    var out = [];
+    l.items.forEach(function (it, i) {
+      out.push({ it: it, key: l.id + ":" + i });
+      if (it.p) out.push({ it: it.p, key: l.id + ":" + i + "p" });
+    });
+    return out;
+  }
 
   var ICON_SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
-  var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/></svg>';
 
-  function currentLang() { return LANGS.filter(function (l) { return l.id === state.lang; })[0]; }
+  /* Study progress, saved in this browser's local storage:
+     a set is GROUPS groups of languages; scores are running ok / not-ok counts per language. */
+  var store = loadStore();
+
+  function blankStore() { return { v: 1, setNo: 0, setsDone: 0, groups: [], current: null, scores: {} }; }
+  function newSet(s, advance) {
+    var ids = shuffle(LANGS.map(function (l) { return l.id; }));
+    s.groups = [];
+    for (var g = 0; g < GROUPS; g++) s.groups.push({ langs: [], done: [] });
+    ids.forEach(function (id, i) { s.groups[i % GROUPS].langs.push(id); });
+    if (advance || !s.setNo) s.setNo += 1;
+    s.current = null;
+  }
+  function groupFinished(g) { return g.done.length >= g.langs.length; }
+  function groupsDone(s) { return s.groups.filter(groupFinished).length; }
+  function setIsValid(s) {
+    if (!s.groups || s.groups.length !== GROUPS) return false;
+    var seen = {}, n = 0;
+    s.groups.forEach(function (g) { g.langs.forEach(function (id) { seen[id] = (seen[id] || 0) + 1; n++; }); });
+    return n === LANGS.length && LANGS.every(function (l) { return seen[l.id] === 1; });
+  }
+  function loadStore() {
+    var s = null;
+    try { localStorage.removeItem(OLD_STORE); } catch (e) {}
+    try { s = JSON.parse(localStorage.getItem(STORE)); } catch (e) {}
+    if (!s || s.v !== 1 || !s.scores) s = blankStore();
+    // A new set is made if there is none, if the language list changed, or if the last one was finished.
+    if (!setIsValid(s)) newSet(s, false);
+    else if (groupsDone(s) === GROUPS) newSet(s, true);
+    return s;
+  }
+  function saveStore() { try { localStorage.setItem(STORE, JSON.stringify(store)); } catch (e) {} }
+
+  function scoreOf(id) {
+    var s = store.scores[id], total = s ? s.ok + s.notOk : 0;
+    return { ok: s ? s.ok : 0, total: total, pct: total ? Math.round(s.ok / total * 100) : null };
+  }
 
   function rowHtml(l, i) {
     var it = shown(l, i), key = keyOf(l, i);
-    var learned = !!state.learned[key];
     var dir = l.rtl ? ' dir="rtl"' : "";
     return '<li class="row" data-key="' + key + '">' +
       '<div class="content">' +
@@ -319,20 +422,23 @@ button { font: inherit; color: inherit; }
         '<div class="mean"><span>' + esc(it.m) + '</span><span class="tag">' + esc(it.g) + '</span></div>' +
       '</div>' +
       '<div class="acts">' +
-        (AUDIO[key] ? '<button type="button" class="icon speak" data-act="speak" data-key="' + key + '" aria-label="Listen to ' + esc(l.name) + ' greeting">' + ICON_SPEAK + '</button>' : '<span></span>') +
-        '<button type="button" class="icon learn" data-act="learn" data-key="' + key + '" aria-pressed="' + learned + '" aria-label="Mark as learned">' + ICON_CHECK + '</button>' +
+        (AUDIO[key] ? '<button type="button" class="icon speak" data-act="speak" data-key="' + key + '" aria-label="Listen to ' + esc(l.name) + ' greeting">' + ICON_SPEAK + '</button>' : '') +
       '</div>' +
     '</li>';
+  }
+
+  function countText(id) {
+    var sc = scoreOf(id);
+    return sc.total ? "Score " + sc.pct + "% (" + sc.ok + " of " + sc.total + " OK)" : "Not studied yet";
   }
 
   function render() {
     var l = currentLang();
     var rows = l.items.map(function (_, i) { return rowHtml(l, i); }).join("");
-    var main = document.getElementById("langs");
-    main.innerHTML =
+    document.getElementById("langs").innerHTML =
       '<section class="lang" id="' + l.id + '" aria-labelledby="h-' + l.id + '">' +
         '<div class="lang-head">' +
-          '<div class="lang-title"><h2 id="h-' + l.id + '">' + esc(l.name) + '</h2><span class="own" lang="' + esc(l.lang) + '">' + esc(l.own) + '</span><span class="count" data-count="' + l.id + '"></span></div>' +
+          '<div class="lang-title"><h2 id="h-' + l.id + '">' + esc(l.name) + '</h2><span class="own" lang="' + esc(l.lang) + '">' + esc(l.own) + '</span><span class="count">' + esc(countText(l.id)) + '</span></div>' +
           '<p class="where">' + esc(l.where) + '</p>' +
           '<p class="tip">' + esc(l.tip) + '</p>' +
         '</div>' +
@@ -345,31 +451,18 @@ button { font: inherit; color: inherit; }
     updateProgress();
   }
 
-  function learnedCount(l) {
-    var seen = {};
-    l.items.forEach(function (_, i) { ["all", "one"].forEach(function (w) { var k = keyOf(l, i, w); if (state.learned[k]) seen[k] = true; }); });
-    return Object.keys(seen).length;
-  }
-
   function renderMenu() {
     document.getElementById("menu").innerHTML = LANGS.map(function (l) {
-      var d = learnedCount(l);
-      var all = d === totalOf(l);
-      return '<li><button type="button" data-lang="' + l.id + '" class="' + (all ? "done" : "") + '" aria-current="' + (l.id === state.lang) + '">' +
-        '<span class="nm">' + esc(l.name) + '</span><span class="ct">' + d + ' / ' + totalOf(l) + '</span></button></li>';
+      var sc = scoreOf(l.id);
+      return '<li><button type="button" data-lang="' + l.id + '" aria-current="' + (l.id === state.lang) + '">' +
+        '<span class="nm">' + esc(l.name) + '</span><span class="ct" title="Share of greetings marked OK">' + (sc.total ? sc.pct + "%" : "–") + '</span></button></li>';
     }).join("");
   }
 
   function updateProgress() {
-    var total = 0, done = 0;
-    LANGS.forEach(function (l) {
-      var d = learnedCount(l);
-      total += totalOf(l); done += d;
-      var el = document.querySelector('[data-count="' + l.id + '"]');
-      if (el) el.textContent = d + " / " + totalOf(l);
-    });
-    document.getElementById("meter").style.width = (total ? (done / total) * 100 : 0) + "%";
-    document.getElementById("progText").textContent = done + " of " + total + " learned";
+    var done = groupsDone(store);
+    document.getElementById("meter").style.width = (done / GROUPS * 100) + "%";
+    document.getElementById("progText").textContent = "Set " + store.setNo + ": " + done + " of " + GROUPS + " groups studied";
   }
 
   /* Audio */
@@ -397,20 +490,156 @@ button { font: inherit; color: inherit; }
     if (p && p.catch) p.catch(function () { if (player !== a) return; stopPlayer(); toast("Audio can't play in this browser."); });
   }
 
+  /* Study: full screen, one group of languages at a time, one greeting at a time. */
+  var session = null;
+  var studyEl = document.getElementById("study"), studyBody = document.getElementById("studyBody");
+
+  function openStudy() {
+    var g = store.current;
+    if (g == null || groupFinished(store.groups[g])) {
+      var open = [];
+      store.groups.forEach(function (grp, i) { if (!groupFinished(grp)) open.push(i); });
+      g = open[Math.floor(Math.random() * open.length)];
+      store.current = g; saveStore();
+    }
+    var grp = store.groups[g];
+    session = {
+      g: g, total: grp.langs.length, results: [], cur: null,
+      queue: shuffle(grp.langs.filter(function (id) { return grp.done.indexOf(id) < 0; }))
+    };
+    studyEl.hidden = false;
+    document.body.style.overflow = "hidden";
+    nextCard();
+  }
+
+  function closeStudy() {
+    stopPlayer();
+    studyEl.hidden = true;
+    document.body.style.overflow = "";
+    session = null;
+    render();
+    document.getElementById("studyBtn").focus();
+  }
+
+  function setStudy(crumb, fraction, html) {
+    document.getElementById("studyCrumb").textContent = crumb;
+    document.getElementById("studyMeter").style.width = Math.round(fraction * 100) + "%";
+    studyBody.innerHTML = html;
+    studyEl.focus({ preventScroll: true });
+    studyEl.scrollTop = 0;
+  }
+
+  function crumbText() {
+    var done = session.total - session.queue.length;
+    return "Set " + store.setNo + " · Group " + (session.g + 1) + " · Language " + Math.min(done + 1, session.total) + " of " + session.total;
+  }
+
+  function nextCard() {
+    if (!session.queue.length) { showGroupDone(); return; }
+    var l = langById(session.queue[0]);
+    session.cur = { id: l.id, list: shuffle(greetingsOf(l)), i: 0, ok: 0, opened: false };
+    showGreeting();
+  }
+
+  // The test: show the English first, the learner says the greeting, presses Open to check it,
+  // then rates themselves OK or Not OK. Rating is only possible once the answer is open.
+  function showGreeting() {
+    var c = session.cur, l = langById(c.id), gr = c.list[c.i], it = gr.it;
+    var dir = l.rtl ? ' dir="rtl"' : "";
+    var done = session.total - session.queue.length;
+    var answerHtml = c.opened
+      ? '<div class="answer">' +
+          '<div class="native" lang="' + esc(l.lang) + '"' + dir + '>' + esc(it.t) + '</div>' +
+          (it.r ? '<div class="roman">' + esc(it.r) + '</div>' : '') +
+          '<div class="say"><span class="lab">Sounds like</span>' + esc(it.s) + '</div>' +
+          (AUDIO[gr.key] ? '<div class="flash-audio"><button type="button" class="icon speak" data-act="speak" data-key="' + gr.key + '" aria-label="Listen">' + ICON_SPEAK + '</button></div>' : '') +
+        '</div>'
+      : "";
+    setStudy(crumbText(), (done + c.i / c.list.length) / session.total,
+      '<div class="flash">' +
+        '<div class="flash-top"><span class="flash-lang">' + esc(l.name) + ' <span class="own" lang="' + esc(l.lang) + '">' + esc(l.own) + '</span></span><span class="flash-n">Greeting ' + (c.i + 1) + ' of ' + c.list.length + '</span></div>' +
+        '<div class="prompt">' + esc(it.m) + '</div>' +
+        '<div class="mean"><span class="tag">' + esc(it.g) + '</span></div>' +
+        answerHtml +
+      '</div>' +
+      '<div class="study-actions three">' +
+        '<button type="button" class="big open" data-s="open"' + (c.opened ? " disabled" : "") + '>Open</button>' +
+        '<button type="button" class="big bad" data-s="notok"' + (c.opened ? "" : " disabled") + '>Not OK</button>' +
+        '<button type="button" class="big ok" data-s="ok"' + (c.opened ? "" : " disabled") + '>OK</button>' +
+      '</div>');
+  }
+
+  function answer(ok) {
+    stopPlayer();
+    var c = session.cur;
+    if (!c.opened) return;
+    if (ok) c.ok++;
+    c.i++;
+    c.opened = false;
+    if (c.i < c.list.length) showGreeting(); else finishCard();
+  }
+
+  function finishCard() {
+    var c = session.cur, l = langById(c.id), n = c.list.length, pct = Math.round(c.ok / n * 100);
+    var s = store.scores[c.id] || (store.scores[c.id] = { ok: 0, notOk: 0, last: 0, attempts: 0 });
+    s.ok += c.ok; s.notOk += n - c.ok; s.last = pct; s.attempts++;
+    store.groups[session.g].done.push(c.id);
+    saveStore();
+    session.queue.shift();
+    session.results.push({ name: l.name, ok: c.ok, n: n, pct: pct });
+    var last = !session.queue.length;
+    var done = session.total - session.queue.length;
+    setStudy(crumbText(), done / session.total,
+      '<div class="flash result">' +
+        '<h2>' + esc(l.name) + '</h2>' +
+        '<p class="big-score">' + pct + '%</p>' +
+        '<p>' + c.ok + ' of ' + n + ' greetings OK</p>' +
+        '<p class="muted">Overall for ' + esc(l.name) + ': ' + esc(countText(l.id).replace("Score ", "")) + '</p>' +
+      '</div>' +
+      '<div class="study-actions one"><button type="button" class="big ok" data-s="next">' + (last ? "Finish group" : "Next language") + '</button></div>');
+  }
+
+  function showGroupDone() {
+    var setNo = store.setNo, finishedSet = groupsDone(store) === GROUPS, doneCount = groupsDone(store);
+    if (finishedSet) { store.setsDone++; newSet(store, true); }
+    store.current = null;
+    saveStore();
+    var rows = session.results.map(function (r) {
+      return '<li><span>' + esc(r.name) + '</span><span>' + r.ok + ' / ' + r.n + ' · ' + r.pct + '%</span></li>';
+    }).join("");
+    var msg = finishedSet
+      ? "Set " + setNo + " is complete. Set " + store.setNo + " is ready, with new random groups."
+      : "Set " + setNo + ": " + doneCount + " of " + GROUPS + " groups studied.";
+    setStudy("Set " + setNo + " · Group " + (session.g + 1) + " finished", 1,
+      '<div class="flash result">' +
+        '<h2>' + (finishedSet ? "Set complete" : "Group finished") + '</h2>' +
+        (rows ? '<ul class="results">' + rows + '</ul>' : '') +
+        '<p>' + esc(msg) + '</p>' +
+      '</div>' +
+      '<div class="study-actions">' +
+        '<button type="button" class="big" data-s="close">Close</button>' +
+        '<button type="button" class="big ok" data-s="again">Study next group</button>' +
+      '</div>');
+    renderMenu(); updateProgress();
+  }
+
   /* Events */
   document.addEventListener("click", function (e) {
     var act = e.target.closest("[data-act]");
-    if (act) {
-      var key = act.getAttribute("data-key");
-      if (act.getAttribute("data-act") === "speak") { speak(key, act); }
-      else {
-        state.learned[key] = !state.learned[key];
-        if (!state.learned[key]) delete state.learned[key];
-        act.setAttribute("aria-pressed", String(!!state.learned[key]));
-        persist(); updateProgress(); renderMenu();
-      }
+    if (act) { speak(act.getAttribute("data-key"), act); return; }
+    var s = e.target.closest("[data-s]");
+    if (s) {
+      var what = s.getAttribute("data-s");
+      if (what === "open") { session.cur.opened = true; showGreeting(); }
+      else if (what === "ok") answer(true);
+      else if (what === "notok") answer(false);
+      else if (what === "next") nextCard();
+      else if (what === "again") openStudy();
+      else if (what === "close") closeStudy();
       return;
     }
+    if (e.target.closest("#studyBtn")) { openStudy(); return; }
+    if (e.target.closest("#studyClose")) { closeStudy(); return; }
     var pick = e.target.closest("[data-lang]");
     if (pick) {
       stopPlayer();
@@ -423,18 +652,23 @@ button { font: inherit; color: inherit; }
     if (who) { stopPlayer(); state.who = who.getAttribute("data-who"); render(); return; }
   });
 
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !studyEl.hidden) closeStudy();
+  });
+
   var resetBtn = document.getElementById("reset"), resetTimer, armed = false;
   resetBtn.addEventListener("click", function () {
     if (!armed) {
-      armed = true; resetBtn.textContent = "Tap again to clear";
-      resetTimer = setTimeout(function () { armed = false; resetBtn.textContent = "Clear progress"; }, 3000);
+      armed = true; resetBtn.textContent = "Tap again to reset";
+      resetTimer = setTimeout(function () { armed = false; resetBtn.textContent = "Reset scores"; }, 3000);
       return;
     }
-    clearTimeout(resetTimer); armed = false; resetBtn.textContent = "Clear progress";
-    state.learned = {}; persist(); render();
-    toast("Progress cleared.");
+    clearTimeout(resetTimer); armed = false; resetBtn.textContent = "Reset scores";
+    store = blankStore(); newSet(store, false); saveStore(); render();
+    toast("Scores reset.");
   });
 
+  saveStore();
   render();
 })();
 </script>
