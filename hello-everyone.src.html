@@ -193,19 +193,13 @@ button { font: inherit; color: inherit; }
 .rows { list-style: none; margin: 0; padding: 0; }
 .row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.5rem; padding: 0.85rem 0.6rem 0.85rem 1rem; border-top: 1px solid var(--line); align-items: start; }
 .content { min-width: 0; display: flex; flex-direction: column; gap: 0.2rem; border-radius: 8px; }
-.practice .content { cursor: pointer; }
 .native { font-family: var(--font-script); font-weight: 600; font-size: clamp(1.45rem, 5vw, 1.9rem); line-height: 1.3; text-align: left; overflow-wrap: anywhere; }
 .roman { font-weight: 600; font-size: 1rem; }
 .say { color: var(--muted); font-size: 0.95rem; }
 .say .lab { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
 .mean { font-size: 0.92rem; display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem; align-items: center; }
 .tag { background: var(--soft); color: var(--muted); border-radius: 99px; padding: 0.05rem 0.6rem; font-size: 0.78rem; font-weight: 500; }
-.hint { display: none; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; }
 
-.hide { filter: blur(9px); opacity: 0.5; user-select: none; pointer-events: none; }
-.practice .row:not(.open) .hint { display: block; }
-.mode-english .content .mean { order: -1; font-size: 1.05rem; font-weight: 600; }
-.mode-english .content .mean .tag { font-weight: 500; }
 
 .acts { display: grid; grid-template-columns: repeat(2, auto); gap: 0.1rem; justify-items: center; }
 .icon {
@@ -265,17 +259,12 @@ button { font: inherit; color: inherit; }
 
   <div class="pane">
     <p class="mobile-head">Hello, everyone</p>
-    <div class="seg" role="group" aria-label="Practice mode">
-      <button type="button" data-mode="study" aria-pressed="true">Study</button>
-      <button type="button" data-mode="script" aria-pressed="false">See script</button>
-      <button type="button" data-mode="english" aria-pressed="false">See English</button>
-    </div>
     <div class="seg who" role="group" aria-label="Greet">
       <button type="button" data-who="all" aria-pressed="true">Everyone</button>
       <button type="button" data-who="one" aria-pressed="false">One person</button>
     </div>
     <div class="tools">
-      <p class="caption" id="caption"></p>
+      <p class="caption">Read each greeting, listen to it, and say it out loud.</p>
       <button type="button" class="pill" id="reset">Clear progress</button>
     </div>
 
@@ -296,14 +285,9 @@ button { font: inherit; color: inherit; }
   var AUDIO = {};
   /*END AUDIO*/
 
-  var CAPTIONS = {
-    study: "Everything is showing. Read each greeting, listen to it, and say it out loud.",
-    script: "Read the greeting in its own script and say it. Then tap the row to check the sound and the meaning.",
-    english: "Start from the English and say the greeting aloud. Then tap the row to check your answer."
-  };
   var STORE = "hello-everyone-learned-v2";
 
-  var state = { mode: "study", who: "all", lang: LANGS[0].id, open: {}, learned: {} };
+  var state = { who: "all", lang: LANGS[0].id, learned: {} };
 
   var fromHash = location.hash.slice(1);
   if (LANGS.some(function (l) { return l.id === fromHash; })) state.lang = fromHash;
@@ -325,22 +309,14 @@ button { font: inherit; color: inherit; }
 
   function rowHtml(l, i) {
     var it = shown(l, i), key = keyOf(l, i);
-    var practice = state.mode !== "study";
-    var open = !!state.open[key];
-    var hidden = practice && !open;
-    var hideNative = hidden && state.mode === "english" ? " hide" : "";
-    var hideRest = hidden ? " hide" : "";
-    var hideMean = hidden && state.mode === "script" ? " hide" : "";
     var learned = !!state.learned[key];
     var dir = l.rtl ? ' dir="rtl"' : "";
-    var role = practice ? ' role="button" tabindex="0" aria-expanded="' + open + '"' : "";
-    return '<li class="row' + (open ? " open" : "") + '" data-key="' + key + '">' +
-      '<div class="content"' + role + '>' +
-        '<div class="native f-native' + hideNative + '" lang="' + esc(l.lang) + '"' + dir + '>' + esc(it.t) + '</div>' +
-        '<div class="roman f-roman' + hideRest + '">' + esc(it.r) + '</div>' +
-        '<div class="say f-say' + hideRest + '"><span class="lab">Sounds like</span>' + esc(it.s) + '</div>' +
-        '<div class="mean f-mean' + hideMean + '"><span>' + esc(it.m) + '</span><span class="tag">' + esc(it.g) + '</span></div>' +
-        '<div class="hint">Tap to reveal</div>' +
+    return '<li class="row" data-key="' + key + '">' +
+      '<div class="content">' +
+        '<div class="native" lang="' + esc(l.lang) + '"' + dir + '>' + esc(it.t) + '</div>' +
+        (it.r ? '<div class="roman">' + esc(it.r) + '</div>' : '') +
+        '<div class="say"><span class="lab">Sounds like</span>' + esc(it.s) + '</div>' +
+        '<div class="mean"><span>' + esc(it.m) + '</span><span class="tag">' + esc(it.g) + '</span></div>' +
       '</div>' +
       '<div class="acts">' +
         (AUDIO[key] ? '<button type="button" class="icon speak" data-act="speak" data-key="' + key + '" aria-label="Listen to ' + esc(l.name) + ' greeting">' + ICON_SPEAK + '</button>' : '<span></span>') +
@@ -362,11 +338,6 @@ button { font: inherit; color: inherit; }
         '</div>' +
         '<ul class="rows">' + rows + '</ul>' +
       '</section>';
-    main.className = (state.mode !== "study" ? "practice " : "") + "mode-" + state.mode;
-    document.getElementById("caption").textContent = CAPTIONS[state.mode];
-    Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-mode]"), function (b) {
-      b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === state.mode));
-    });
     Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-who]"), function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-who") === state.who));
     });
@@ -427,14 +398,6 @@ button { font: inherit; color: inherit; }
   }
 
   /* Events */
-  function toggleOpen(row) {
-    var key = row.getAttribute("data-key");
-    state.open[key] = !state.open[key];
-    render();
-    var again = document.querySelector('.row[data-key="' + key + '"] .content');
-    if (again) again.focus({ preventScroll: true });
-  }
-
   document.addEventListener("click", function (e) {
     var act = e.target.closest("[data-act]");
     if (act) {
@@ -451,24 +414,13 @@ button { font: inherit; color: inherit; }
     var pick = e.target.closest("[data-lang]");
     if (pick) {
       stopPlayer();
-      state.lang = pick.getAttribute("data-lang"); state.open = {};
+      state.lang = pick.getAttribute("data-lang");
       try { history.replaceState(null, "", "#" + state.lang); } catch (err) {}
       render();
       return;
     }
     var who = e.target.closest(".seg button[data-who]");
-    if (who) { stopPlayer(); state.who = who.getAttribute("data-who"); state.open = {}; render(); return; }
-    var seg = e.target.closest(".seg button[data-mode]");
-    if (seg) { state.mode = seg.getAttribute("data-mode"); state.open = {}; render(); return; }
-    var content = e.target.closest(".practice .content");
-    if (content) { toggleOpen(content.closest(".row")); }
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches(".practice .content")) {
-      e.preventDefault();
-      toggleOpen(e.target.closest(".row"));
-    }
+    if (who) { stopPlayer(); state.who = who.getAttribute("data-who"); render(); return; }
   });
 
   var resetBtn = document.getElementById("reset"), resetTimer, armed = false;

@@ -1022,5 +1022,23 @@
         "g": "Polite"
       }
     ]
+  },
+  {
+    "id": "shanghainese",
+    "name": "Shanghainese",
+    "own": "上海话",
+    "where": "Shanghai, China",
+    "lang": "wuu",
+    "tts": null,
+    "tip": "Shanghainese is a Wu language, not a dialect of Mandarin, so it sounds quite different. 侬 means you, and 老 here means very.",
+    "items": [
+      {
+        "t": "认得侬老开心",
+        "r": "",
+        "s": "nin-teh nong law kay-sin",
+        "m": "Nice to meet you (so happy to know you)",
+        "g": "Friendly"
+      }
+    ]
   }
 ]
