@@ -155,26 +155,6 @@ button { font: inherit; color: inherit; }
 
 /* Right panel */
 .pane { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
-.seg {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background: var(--soft);
-  border-radius: 10px;
-  padding: 3px;
-  gap: 3px;
-}
-.seg button {
-  border: 0;
-  background: transparent;
-  border-radius: 8px;
-  padding: 0.55rem 0.4rem;
-  font-weight: 600;
-  font-size: 0.92rem;
-  cursor: pointer;
-  min-height: 2.75rem;
-}
-.seg button[aria-pressed="true"] { background: var(--badge); color: var(--badge-fg); }
-.seg.who { grid-template-columns: repeat(2, 1fr); }
 .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; }
 .caption { flex: 1 1 16rem; min-width: 0; margin: 0; color: var(--muted); font-size: 0.92rem; }
 .pill {
@@ -310,10 +290,6 @@ button { font: inherit; color: inherit; }
 
   <div class="pane">
     <p class="mobile-head">Hello, everyone</p>
-    <div class="seg who" role="group" aria-label="Greet">
-      <button type="button" data-who="all" aria-pressed="true">Everyone</button>
-      <button type="button" data-who="one" aria-pressed="false">One person</button>
-    </div>
     <div class="tools">
       <p class="caption">Read each greeting, listen to it, and say it out loud.</p>
       <button type="button" class="pill" id="reset">Reset scores</button>
@@ -347,7 +323,7 @@ button { font: inherit; color: inherit; }
   var STORE = "hello-everyone-study-v1";
   var GROUPS = 5;
 
-  var state = { who: "all", lang: LANGS[0].id };
+  var state = { lang: LANGS[0].id };
 
   var fromHash = location.hash.slice(1);
   if (LANGS.some(function (l) { return l.id === fromHash; })) state.lang = fromHash;
@@ -357,10 +333,8 @@ button { font: inherit; color: inherit; }
   function langById(id) { return LANGS.filter(function (l) { return l.id === id; })[0]; }
   function currentLang() { return langById(state.lang); }
 
-  // Every greeting has a version for everyone and one for a single person ("p"), keyed id:i and id:ip.
-  // An item with no "p" version (a single phrase that suits both) uses the same key and text in both views.
-  function keyOf(l, i) { return l.id + ":" + i + (state.who === "one" && l.items[i].p ? "p" : ""); }
-  function shown(l, i) { return state.who === "one" && l.items[i].p ? l.items[i].p : l.items[i]; }
+  // Every greeting has a version for everyone and, for most, one for a single person ("p"), keyed id:i and id:ip.
+  // Both are listed as ordinary phrases.
   // Every distinct greeting in a language, for the study test.
   function greetingsOf(l) {
     var out = [];
@@ -411,8 +385,8 @@ button { font: inherit; color: inherit; }
     return { ok: s ? s.ok : 0, total: total, pct: total ? Math.round(s.ok / total * 100) : null };
   }
 
-  function rowHtml(l, i) {
-    var it = shown(l, i), key = keyOf(l, i);
+  function rowHtml(l, gr) {
+    var it = gr.it, key = gr.key;
     var dir = l.rtl ? ' dir="rtl"' : "";
     return '<li class="row" data-key="' + key + '">' +
       '<div class="content">' +
@@ -434,7 +408,7 @@ button { font: inherit; color: inherit; }
 
   function render() {
     var l = currentLang();
-    var rows = l.items.map(function (_, i) { return rowHtml(l, i); }).join("");
+    var rows = greetingsOf(l).map(function (gr) { return rowHtml(l, gr); }).join("");
     document.getElementById("langs").innerHTML =
       '<section class="lang" id="' + l.id + '" aria-labelledby="h-' + l.id + '">' +
         '<div class="lang-head">' +
@@ -444,9 +418,6 @@ button { font: inherit; color: inherit; }
         '</div>' +
         '<ul class="rows">' + rows + '</ul>' +
       '</section>';
-    Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-who]"), function (b) {
-      b.setAttribute("aria-pressed", String(b.getAttribute("data-who") === state.who));
-    });
     renderMenu();
     updateProgress();
   }
@@ -648,8 +619,6 @@ button { font: inherit; color: inherit; }
       render();
       return;
     }
-    var who = e.target.closest(".seg button[data-who]");
-    if (who) { stopPlayer(); state.who = who.getAttribute("data-who"); render(); return; }
   });
 
   document.addEventListener("keydown", function (e) {

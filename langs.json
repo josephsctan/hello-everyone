@@ -153,6 +153,20 @@
           "m": "Hi",
           "g": "Friends only"
         }
+      },
+      {
+        "t": "안녕하세요, 만나서 반갑습니다.",
+        "r": "annyeonghaseyo, mannaseo bangapseumnida",
+        "s": "ahn-nyuhng-ha-say-yo, mahn-nah-suh bahn-gahp-seum-nee-da",
+        "m": "Hello, nice to meet you",
+        "g": "Polite"
+      },
+      {
+        "t": "감사합니다.",
+        "r": "gamsahamnida",
+        "s": "gahm-sah-hahm-nee-da",
+        "m": "Thank you",
+        "g": "Polite"
       }
     ]
   },
@@ -192,6 +206,13 @@
           "m": "Good morning",
           "g": "Morning"
         }
+      },
+      {
+        "t": "日本語を学ぼうとしています",
+        "r": "nihongo o manabou to shite imasu",
+        "s": "nee-hohn-goh oh mah-nah-boh toh shteh ee-mahs",
+        "m": "I'm trying to learn Japanese",
+        "g": "Polite"
       }
     ]
   },
